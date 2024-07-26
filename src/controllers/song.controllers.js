@@ -11,9 +11,16 @@ const create = catchError(async(req,res) => {
     return res.status(201).json(result)
 })
 
+const getOne = catchError(async(req,res) => {
+    const { id } = req.params
+    const result = await Song.findByPk(id)
+    return res.json(result)
+})
+
 
 
 module.exports = {
     getAll,
-    create
+    create,
+    getOne
 }
