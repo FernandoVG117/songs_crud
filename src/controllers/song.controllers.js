@@ -26,11 +26,25 @@ const destroy = catchError(async(req,res) => {
     return res.sendStatus(204)
 })
 
+const update = catchError(async(req,res) => {
+    const { id } = req.params
+    const song = await Song.update(
+        req.body,
+        {
+            where: {id},
+            returning: true,
+        }
+    )
+    if(song[0] === 0) return res.sendStatus(404)
+    return res.status(200).json(song[1][0])
+})
+
 
 
 module.exports = {
     getAll,
     create,
     getOne,
-    destroy
+    destroy,
+    update
 }
