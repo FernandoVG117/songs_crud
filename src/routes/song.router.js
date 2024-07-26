@@ -1,4 +1,4 @@
-const { getAll, create, getOne } = require('../controllers/song.controllers');
+const { getAll, create, getOne, destroy } = require('../controllers/song.controllers');
 const express = require('express');
 const songRouter = express.Router();
 
@@ -8,6 +8,7 @@ songRouter.route("/")
 
 songRouter.route("/:id")
     .get(getOne)
+    .delete(destroy)
 
 
 module.exports = songRouter;
