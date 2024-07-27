@@ -14,6 +14,9 @@ const create = catchError(async(req,res) => {
 const getOne = catchError(async(req,res) => {
     const { id } = req.params
     const result = await Song.findByPk(id)
+    
+    if(!result) return res.sendStatus(404)
+    
     return res.json(result)
 })
 
@@ -21,7 +24,7 @@ const destroy = catchError(async(req,res) => {
     const { id } = req.params
     const result = await Song.destroy({where:{id}})
 
-    if(!result) return res.sendStatus(404)//.json("Song not found")
+    if(!result) return res.sendStatus(404)
     
     return res.sendStatus(204)
 })
